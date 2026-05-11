@@ -26,7 +26,7 @@ This prototype was built prioritizing speed, professional quality, and a robust 
 * **Framework:** [Next.js 14](https://nextjs.org/) (App Router) for a robust full-stack foundation.
 * **UI & Styling:** [Tailwind CSS](https://tailwindcss.com/) paired with [Shadcn UI](https://ui.shadcn.com/) for rapid, accessible, and premium component design.
 * **Animations:** [Framer Motion](https://www.framer.com/motion/) for fluid, professional interactions.
-* **AI Integration:** [Vercel AI SDK](https://sdk.vercel.ai/docs) orchestrating Google's [Gemini 1.5 Flash](https://deepmind.google/technologies/gemini/flash/) for high-speed, cost-effective reasoning and synthesis.
+* **AI Integration:** [Vercel AI SDK](https://sdk.vercel.ai/docs) orchestrating Google's [Gemini 2.5 Flash](https://deepmind.google/technologies/gemini/flash/) for high-speed, cost-effective reasoning and synthesis.
 * **Content Extraction:** [Jina Reader API](https://jina.ai/reader/) for reliable, clean text extraction from URLs.
 
 ---

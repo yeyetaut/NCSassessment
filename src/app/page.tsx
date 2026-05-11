@@ -169,7 +169,7 @@ export default function Page() {
                   )}
                 </Button>
                 <p className="text-[10px] text-slate-400 font-bold uppercase tracking-[0.2em]">
-                  Powered by Gemini 1.5 Flash
+                  Powered by Gemini 2.5 Flash
                 </p>
               </div>
             </div>

@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, Variants } from 'framer-motion';
 import { Synthesis } from '@/lib/schema/data-model';
 import { ConsensusList } from './ConsensusList';
 import { ConflictCard } from './ConflictCard';
@@ -18,50 +18,59 @@ const containerVariants = {
       staggerChildren: 0.1
     }
   }
-};
+} as const;
 
 const itemVariants = {
   hidden: { opacity: 0, y: 15 },
-  show: { opacity: 1, y: 0, transition: { type: 'spring', stiffness: 300, damping: 24 } }
-};
+  show: { 
+    opacity: 1, 
+    y: 0, 
+    transition: { 
+      type: 'spring', 
+      stiffness: 300, 
+      damping: 24 
+    } 
+  }
+} as const;
 
 export function ConflictMatrix({ data }: ConflictMatrixProps) {
   return (
     <div className="space-y-10 w-full max-w-7xl mx-auto p-4 md:p-8">
       <div className="space-y-3">
         <h2 className="text-3xl font-bold text-slate-900 tracking-tight">{data.topic}</h2>
-        <p className="text-slate-600 text-lg leading-relaxed max-w-4xl">{data.summary}</p>
+        <p className="text-slate-600 text-lg leading-relaxed">{data.summary}</p>
       </div>
 
-      <motion.div 
-        className="grid grid-cols-1 md:grid-cols-4 gap-6 grid-flow-dense"
+      <motion.div
+        className="grid grid-cols-1 md:grid-cols-4 gap-x-6 gap-y-4"
         variants={containerVariants}
         initial="hidden"
         animate="show"
       >
-        <motion.div className="md:col-span-1 md:row-span-2" variants={itemVariants}>
+        <motion.div className="md:col-span-1" variants={itemVariants}>
           <ConsensusList consensus={data.consensus} />
         </motion.div>
 
-        {!data.conflicts || data.conflicts.length === 0 ? (
-          <motion.div 
-            className="md:col-span-3 p-8 border border-[#EAEAEA] rounded-[8px] bg-slate-50 flex flex-col items-center justify-center text-center h-full min-h-[300px]"
-            variants={itemVariants}
-          >
-            <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mb-4">
-              <CheckCircle2 className="w-8 h-8 text-emerald-600" />
-            </div>
-            <h3 className="text-xl font-semibold text-slate-900">All Consensus</h3>
-            <p className="text-slate-500 mt-2 text-md max-w-md">No major friction points detected across the analyzed sources. The reports align on key metrics and conclusions.</p>
-          </motion.div>
-        ) : (
-          data.conflicts.map((conflict, idx) => (
-            <motion.div key={idx} className="md:col-span-3" variants={itemVariants}>
-              <ConflictCard conflict={conflict} index={idx} />
+        <div className="md:col-span-3 space-y-4">
+          {!data.conflicts || data.conflicts.length === 0 ? (
+            <motion.div
+              className="p-8 border border-[#EAEAEA] rounded-[8px] bg-slate-50 flex flex-col items-center justify-center text-center h-full min-h-[300px]"
+              variants={itemVariants}
+            >
+              <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mb-4">
+                <CheckCircle2 className="w-8 h-8 text-emerald-600" />
+              </div>
+              <h3 className="text-xl font-semibold text-slate-900">All Consensus</h3>
+              <p className="text-slate-500 mt-2 text-md max-w-md">No major friction points detected across the analyzed sources. The reports align on key metrics and conclusions.</p>
             </motion.div>
-          ))
-        )}
-      </motion.div>
-    </div>
+          ) : (
+            data.conflicts.map((conflict, idx) => (
+              <motion.div key={idx} variants={itemVariants}>
+                <ConflictCard conflict={conflict} index={idx} />
+              </motion.div>
+            ))
+          )}
+        </div>
+      </motion.div>    </div>
   );
 }
