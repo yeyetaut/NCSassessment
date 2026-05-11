@@ -1,4 +1,5 @@
-import React from 'react';
+'use client';
+
 import { motion } from 'framer-motion';
 import { Synthesis } from '@/lib/schema/data-model';
 import { ConsensusList } from './ConsensusList';
@@ -39,7 +40,7 @@ export function ConflictMatrix({ data }: ConflictMatrixProps) {
         animate="show"
       >
         <motion.div className="md:col-span-1 md:row-span-2" variants={itemVariants}>
-          <ConsensusList items={data.consensus} />
+          <ConsensusList consensus={data.consensus} />
         </motion.div>
 
         {!data.conflicts || data.conflicts.length === 0 ? (
@@ -56,7 +57,7 @@ export function ConflictMatrix({ data }: ConflictMatrixProps) {
         ) : (
           data.conflicts.map((conflict, idx) => (
             <motion.div key={idx} className="md:col-span-3" variants={itemVariants}>
-              <ConflictCard conflict={conflict} />
+              <ConflictCard conflict={conflict} index={idx} />
             </motion.div>
           ))
         )}

@@ -1,41 +1,50 @@
-import React from 'react';
-import { AlertCircle } from 'lucide-react';
-import { clsx } from 'clsx';
-import { Synthesis } from '@/lib/schema/data-model';
+'use client';
 
-type Conflict = Synthesis['conflicts'][0];
+import React from 'react';
+import { Synthesis } from '@/lib/schema/data-model';
+import { Badge } from '@/components/ui/badge';
+import { AlertCircle } from 'lucide-react';
+
+type Conflict = Synthesis['conflicts'][number];
 
 interface ConflictCardProps {
   conflict: Conflict;
+  index: number;
 }
 
-const badgeColors = {
-  low: 'bg-slate-100 text-slate-700 border-slate-200',
-  medium: 'bg-amber-50 text-amber-700 border-amber-200',
-  high: 'bg-rose-50 text-rose-700 border-rose-200'
-};
+export function ConflictCard({ conflict, index }: ConflictCardProps) {
+  const getSignificanceStyles = (sig: string) => {
+    switch (sig.toLowerCase()) {
+      case 'high': return 'bg-rose-50 text-rose-700 border-rose-100';
+      case 'medium': return 'bg-amber-50 text-amber-700 border-amber-100';
+      default: return 'bg-slate-100 text-slate-600 border-slate-200';
+    }
+  };
 
-export function ConflictCard({ conflict }: ConflictCardProps) {
   return (
-    <div className="p-6 border border-[#EAEAEA] rounded-[8px] bg-white h-full flex flex-col">
-      <div className="flex items-start justify-between mb-6 gap-4">
-        <h4 className="text-lg font-semibold text-slate-900 flex items-center gap-2">
-          <AlertCircle className="w-5 h-5 text-rose-400 shrink-0" />
-          {conflict.subject}
-        </h4>
-        <span className={clsx('text-[11px] px-2.5 py-1 rounded-full border uppercase tracking-widest font-bold shrink-0', badgeColors[conflict.significance])}>
-          {conflict.significance}
-        </span>
+    <div className="bg-white rounded-xl border border-[#EAEAEA] overflow-hidden group hover:shadow-lg transition-all duration-300">
+      <div className="px-6 py-4 border-b border-[#EAEAEA] bg-white flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <div className={`w-1 h-6 rounded-full ${conflict.significance === 'high' ? 'bg-rose-500' : 'bg-amber-400'}`} />
+          <h4 className="font-bold text-slate-900 tracking-tight">{conflict.subject}</h4>
+        </div>
+        <Badge variant="outline" className={`px-2 py-0 text-[10px] uppercase tracking-wider font-bold rounded-full ${getSignificanceStyles(conflict.significance)}`}>
+          {conflict.significance} Impact
+        </Badge>
       </div>
       
-      <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <div className="p-5 rounded-md bg-slate-50 border border-[#EAEAEA]">
-          <span className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3 block">Source A</span>
-          <p className="text-slate-900 font-medium text-[15px] leading-snug">{conflict.sourceA_claim}</p>
+      <div className="grid grid-cols-1 md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-[#EAEAEA]">
+        <div className="p-6 space-y-3">
+          <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Source A</p>
+          <div className="bg-slate-50/50 p-4 rounded-lg border border-slate-100 italic text-slate-700 text-sm leading-relaxed">
+            "{conflict.sourceA_claim}"
+          </div>
         </div>
-        <div className="p-5 rounded-md bg-slate-50 border border-[#EAEAEA]">
-          <span className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3 block">Source B</span>
-          <p className="text-slate-900 font-medium text-[15px] leading-snug">{conflict.sourceB_claim}</p>
+        <div className="p-6 space-y-3">
+          <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Source B</p>
+          <div className="bg-slate-50/50 p-4 rounded-lg border border-slate-100 italic text-slate-700 text-sm leading-relaxed">
+            "{conflict.sourceB_claim}"
+          </div>
         </div>
       </div>
     </div>

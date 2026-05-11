@@ -21,10 +21,11 @@ describe('ConflictMatrix Component', () => {
 
     render(<ConflictMatrix data={mockData as any} />);
 
+    // Use exact match for the header to avoid catching it in the summary
     expect(screen.getByText('Climate Change')).toBeDefined();
-    expect(screen.getByText('Summary of climate change.')).toBeDefined();
-    expect(screen.getByText('Temperature rise')).toBeDefined();
-    expect(screen.getByText('Will rise by 2 degrees')).toBeDefined();
+    expect(screen.getByText(/Summary of climate change/i)).toBeDefined();
+    expect(screen.getByText(/Temperature rise/i)).toBeDefined();
+    expect(screen.getByText(/Will rise by 2 degrees/i)).toBeDefined();
   });
 
   it('shows a specific "All Consensus" message for Zero Conflicts edge case', () => {

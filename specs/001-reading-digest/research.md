@@ -26,9 +26,8 @@
 - **JSON Schema:** Use `.describe()` on Zod fields to provide inline instructions to the LLM.
 - **Mobile Fallback:** Asymmetric grid will fall back to a single column (`grid-cols-1`) on mobile to maintain readability.
 ## Decision: AI Model
-**Choice:** `gemini-1.5-flash` (Google AI SDK).
+**Choice:** `gemini-2.5-flash` (Google AI SDK).
 **Rationale:**
-- Massive 1M+ token context window handles long-form articles and research papers without truncation.
-- High speed and cost-efficiency for structured JSON extraction.
-- Better alignment with NCS's AI-native goals.
-- **Alternatives Considered:** `gpt-4o-mini`. Initially chosen for structured data reliability, but Gemini 1.5 Flash offers superior context handling for "Reading Digest" scale.
+- Latest generation model for superior reasoning and speed.
+- Massive context window for handling large-scale source synthesis.
+- Optimized for structured JSON extraction.
