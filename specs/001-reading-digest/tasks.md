@@ -12,17 +12,17 @@
 - [x] Verify `tests/actions.test.ts` passes. <!-- id: 6 -->
 
 ## Phase 3: Dashboard UI (The Matrix)
-- [ ] Implement `ConflictMatrix` component using CSS Grid (4-cols, asymmetric). <!-- id: 7 -->
-- [ ] Build `ConsensusList` and `ConflictCard` components with Shadcn UI. <!-- id: 8 -->
-- [ ] Add Framer Motion staggered reveal animations to the dashboard. <!-- id: 9 -->
-- [ ] Verify `tests/ConflictMatrix.test.tsx` passes. <!-- id: 10 -->
+- [x] Implement `ConflictMatrix` component using CSS Grid (4-cols, asymmetric). <!-- id: 7 -->
+- [x] Build `ConsensusList` and `ConflictCard` components with Shadcn UI. <!-- id: 8 -->
+- [x] Add Framer Motion staggered reveal animations to the dashboard. <!-- id: 9 -->
+- [x] Verify `tests/ConflictMatrix.test.tsx` passes. <!-- id: 10 -->
 
 ## Phase 4: Integration & E2E
-- [ ] Build main `page.tsx` with hybrid input forms and state management. <!-- id: 11 -->
-- [ ] Connect inputs to the `processInput` Server Action. <!-- id: 12 -->
-- [ ] Implement Playwright E2E test `e2e/demo-journey.spec.ts`. <!-- id: 13 -->
-- [ ] Final polish: typography (`Geist`), spacing, and loading skeletons. <!-- id: 14 -->
+- [x] Build main `page.tsx` with hybrid input forms and state management. <!-- id: 11 -->
+- [x] Connect inputs to the `processInput` Server Action. <!-- id: 12 -->
+- [x] Implement Playwright E2E test `e2e/demo-journey.spec.ts`. <!-- id: 13 -->
+- [x] Final polish: typography (`Geist`), spacing, and loading skeletons. <!-- id: 14 -->
 
 ## Phase 5: Deployment & Validation
-- [ ] Deploy to Vercel. <!-- id: 15 -->
-- [ ] Run final E2E check against live environment. <!-- id: 16 -->
+- [x] Deploy to Vercel. <!-- id: 15 -->
+- [x] Run final E2E check against live environment. <!-- id: 16 -->

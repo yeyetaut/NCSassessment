@@ -1,20 +1,33 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { processInput } from '@/app/actions';
 import { generateObject } from 'ai';
 
+// 1. Mock dependencies BEFORE importing the tested module
 vi.mock('ai', () => ({
   generateObject: vi.fn(),
+}));
+
+vi.mock('next/headers', () => ({
+  cookies: vi.fn(),
 }));
 
 vi.mock('@ai-sdk/openai', () => ({
   openai: vi.fn(),
 }));
 
+// 2. Import the tested module
+import { processInput } from '@/app/actions';
+import { cookies } from 'next/headers';
+
 global.fetch = vi.fn();
 
 describe('processInput action', () => {
   beforeEach(() => {
     vi.resetAllMocks();
+    
+    // Setup default mock implementation for cookies
+    (cookies as any).mockResolvedValue({
+      get: vi.fn().mockReturnValue(undefined),
+    });
   });
 
   it('branches for URL input and returns Synthesis data', async () => {

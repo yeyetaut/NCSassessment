@@ -1,32 +1,29 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
-import { ConflictMatrix } from '@/components/ConflictMatrix';
+import { ConflictMatrix } from '@/components/dashboard/ConflictMatrix';
 
 describe('ConflictMatrix Component', () => {
   it('correctly renders the topic, summary, and conflicts', () => {
     const mockData = {
       topic: 'Climate Change',
       summary: 'Summary of climate change.',
-      sources: [],
+      consensus: ['Earth is warming'],
       conflicts: [
         {
-          point: 'Temperature rise',
-          source1: 'Source A',
-          claim1: 'Will rise by 2 degrees',
-          source2: 'Source B',
-          claim2: 'Will rise by 1.5 degrees',
-          resolution: 'More data needed'
+          subject: 'Temperature rise',
+          sourceA_claim: 'Will rise by 2 degrees',
+          sourceB_claim: 'Will rise by 1.5 degrees',
+          significance: 'high'
         }
       ]
     };
 
-    render(<ConflictMatrix data={mockData} />);
+    render(<ConflictMatrix data={mockData as any} />);
 
     expect(screen.getByText('Climate Change')).toBeDefined();
     expect(screen.getByText('Summary of climate change.')).toBeDefined();
     expect(screen.getByText('Temperature rise')).toBeDefined();
-    expect(screen.getByText('Source A')).toBeDefined();
     expect(screen.getByText('Will rise by 2 degrees')).toBeDefined();
   });
 
@@ -34,11 +31,11 @@ describe('ConflictMatrix Component', () => {
     const mockData = {
       topic: 'Math',
       summary: 'Basic math facts.',
-      sources: [],
+      consensus: ['1 + 1 = 2'],
       conflicts: []
     };
 
-    render(<ConflictMatrix data={mockData} />);
+    render(<ConflictMatrix data={mockData as any} />);
 
     expect(screen.getByText(/All Consensus/i)).toBeDefined();
   });

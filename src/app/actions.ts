@@ -3,6 +3,7 @@
 import { generateObject } from 'ai';
 import { google } from '@ai-sdk/google';
 import { SynthesisSchema } from '@/lib/schema/data-model';
+import { cookies } from 'next/headers';
 
 export type ProcessInputParams = {
   inputA: string;
@@ -12,6 +13,30 @@ export type ProcessInputParams = {
 };
 
 export async function processInput(params: ProcessInputParams) {
+  // Mock mode for E2E testing to avoid API costs and provide deterministic results
+  // Checked via env var or a specific 'mock-ai' cookie
+  const cookieStore = await cookies();
+  const isMockMode = process.env.NEXT_PUBLIC_MOCK_AI === 'true' || cookieStore.get('mock-ai')?.value === 'true';
+
+  if (isMockMode) {
+    return {
+      success: true,
+      data: {
+        topic: 'Mocked E2E Topic',
+        summary: 'This is a mocked summary for E2E testing.',
+        consensus: ['Both sources agree E2E testing is valuable'],
+        conflicts: [
+          {
+            subject: 'Testing Scope',
+            sourceA_claim: 'Test everything',
+            sourceB_claim: 'Test only critical paths',
+            significance: 'high'
+          }
+        ]
+      }
+    };
+  }
+
   try {
     const [contentA, contentB] = await Promise.all([
       fetchContent(params.inputA, params.typeA),
@@ -19,15 +44,15 @@ export async function processInput(params: ProcessInputParams) {
     ]);
 
     const { object } = await generateObject({
-      model: google('gemini-1.5-flash'),
+      model: google('gemini-2.5-flash'),
       schema: SynthesisSchema,
       prompt: `Analyze these two sources. First, identify what they agree on (Consensus). Then, identify specific points where they disagree (Conflicts). For each conflict, provide the subject, Source A's claim, Source B's claim, and a significance rating (low, medium, high).
 
-Source A:
-${contentA}
+    Source A:
+    ${contentA}
 
-Source B:
-${contentB}`,
+    Source B:
+    ${contentB}`,
     });
 
     return { success: true, data: object };
