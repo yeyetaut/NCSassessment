@@ -45,14 +45,20 @@ export async function processInput(params: ProcessInputParams) {
 
     const { object } = await generateObject({
       model: google('gemini-2.5-flash'),
+      temperature: 0, // Forces deterministic output
       schema: SynthesisSchema,
-      prompt: `Analyze these two sources. First, identify what they agree on (Consensus). Then, identify specific points where they disagree (Conflicts). For each conflict, provide the subject, Source A's claim, Source B's claim, and a significance rating (low, medium, high).
+      prompt: `You are an expert intelligence analyst. Your task is to perform an EXHAUSTIVE and DETERMINISTIC comparison of the following two sources.
 
-    Source A:
-    ${contentA}
+MANDATORY RULES:
+1. CONSENSUS: Extract EVERY single fact, metric, and conclusion that both sources agree on.
+2. CONFLICTS: Extract EVERY single discrepancy, contradiction, or differing opinion, no matter how minor. Do not leave any conflicts out.
+3. Do not generalize. Be specific and comprehensive.
 
-    Source B:
-    ${contentB}`,
+Source A:
+${contentA}
+
+Source B:
+${contentB}`,
     });
 
     return { success: true, data: object };
