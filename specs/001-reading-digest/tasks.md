@@ -7,9 +7,9 @@
 - [x] Write failing component test for `ConflictMatrix` UI in `tests/ConflictMatrix.test.tsx`. <!-- id: 3 -->
 
 ## Phase 2: Core Logic (The Synthesis Engine)
-- [ ] Implement `processInput` Server Action with Jina Reader scraping logic. <!-- id: 4 -->
-- [ ] Integrate Vercel AI SDK `generateObject` with the defined Zod schema. <!-- id: 5 -->
-- [ ] Verify `tests/actions.test.ts` passes. <!-- id: 6 -->
+- [x] Implement `processInput` Server Action with Jina Reader scraping logic. <!-- id: 4 -->
+- [x] Integrate Vercel AI SDK `generateObject` with the defined Zod schema. <!-- id: 5 -->
+- [x] Verify `tests/actions.test.ts` passes. <!-- id: 6 -->
 
 ## Phase 3: Dashboard UI (The Matrix)
 - [ ] Implement `ConflictMatrix` component using CSS Grid (4-cols, asymmetric). <!-- id: 7 -->
