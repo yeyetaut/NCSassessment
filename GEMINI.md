@@ -48,5 +48,6 @@ To maximize efficiency within the 180-minute window, follow these delegation rul
 
 <!-- SPECKIT START -->
 For additional context about technologies to be used, project structure,
-shell commands, and other important information, read the current plan
+shell commands, and other important information, read the current plan:
+[specs/001-reading-digest/plan.md](specs/001-reading-digest/plan.md)
 <!-- SPECKIT END -->
