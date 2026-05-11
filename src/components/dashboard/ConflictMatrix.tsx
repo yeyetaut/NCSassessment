@@ -1,6 +1,6 @@
 'use client';
 
-import { motion, Variants } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Synthesis } from '@/lib/schema/data-model';
 import { ConsensusList } from './ConsensusList';
 import { ConflictCard } from './ConflictCard';
@@ -10,30 +10,30 @@ interface ConflictMatrixProps {
   data: Synthesis;
 }
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1
-    }
-  }
-} as const;
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 15 },
-  show: { 
-    opacity: 1, 
-    y: 0, 
-    transition: { 
-      type: 'spring', 
-      stiffness: 300, 
-      damping: 24 
-    } 
-  }
-} as const;
-
 export function ConflictMatrix({ data }: ConflictMatrixProps) {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 15 },
+    show: { 
+      opacity: 1, 
+      y: 0, 
+      transition: { 
+        type: 'spring' as const, 
+        stiffness: 300, 
+        damping: 24 
+      } 
+    }
+  };
+
   return (
     <div className="space-y-10 w-full max-w-7xl mx-auto p-4 md:p-8">
       <div className="space-y-3">
@@ -71,6 +71,7 @@ export function ConflictMatrix({ data }: ConflictMatrixProps) {
             ))
           )}
         </div>
-      </motion.div>    </div>
+      </motion.div>
+    </div>
   );
 }
