@@ -47,12 +47,13 @@ export async function processInput(params: ProcessInputParams) {
       model: google('gemini-2.5-flash'),
       temperature: 0, // Forces deterministic output
       schema: SynthesisSchema,
-      prompt: `You are an expert intelligence analyst. Your task is to perform an EXHAUSTIVE and DETERMINISTIC comparison of the following two sources.
+      prompt: `You are an expert intelligence analyst. Your task is to perform a focused and DETERMINISTIC comparison of the following two sources.
 
 MANDATORY RULES:
-1. CONSENSUS: Extract EVERY single fact, metric, and conclusion that both sources agree on.
-2. CONFLICTS: Extract EVERY single discrepancy, contradiction, or differing opinion, no matter how minor. Do not leave any conflicts out.
-3. Do not generalize. Be specific and comprehensive.
+1. CONSENSUS: Extract the core facts, metrics, and substantive conclusions that both sources agree on.
+2. CONFLICTS: Extract meaningful discrepancies, contradictions, or differing opinions regarding the core narrative or data.
+3. EXCLUSIONS: Ignore minor metadata differences such as publish times, reporting dates, author names, or slight phrasing variations. Focus ONLY on substantive differences that alter the understanding of the topic.
+4. Do not generalize. Be specific and concise.
 
 Source A:
 ${contentA}
